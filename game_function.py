@@ -138,14 +138,14 @@ def change_alien_direction(ai_setting, aliens):
     ai_setting.alien_move_direction *= -1
 
 
-def update_aliens(ai_setting, screen, ship, aliens, bullets, stats):
+def update_aliens(ai_setting, screen, ship, aliens, bullets, stats, score):
     check_alien_edge(ai_setting, aliens)
     aliens.update()
     if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_setting, screen, ship, aliens, bullets, stats)
+        ship_hit(ai_setting, screen, ship, aliens, bullets, stats, score)
     check_alien_bottom(ai_setting, screen, ship, aliens, bullets, stats)
 
-def ship_hit(ai_setting, screen, ship, aliens, bullets, stats):
+def ship_hit(ai_setting, screen, ship, aliens, bullets, stats, score):
     if stats.ship_left > 0:
         #飞船数量减1
         stats.ship_left -= 1
@@ -156,7 +156,8 @@ def ship_hit(ai_setting, screen, ship, aliens, bullets, stats):
         create_aliens(ai_setting, screen, aliens, ship)
         #飞船恢复初始位置
         ship.center_ship()
-
+        #更新显示飞船剩余数量
+        score.prep_ship_left()
         sleep(0.5)
     else:
         stats.game_active = False

@@ -14,6 +14,7 @@ class Scoreboard(object):
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_ship_left()
 
     def prep_score(self):
         #score_str = str(self.stats.score)
@@ -39,10 +40,19 @@ class Scoreboard(object):
         self.level_rect.right = self.screen_rect.right -20
         self.level_rect.top = self.score_rect.top + 50
 
+    def prep_ship_left(self):
+        ship_left_str = str(self.stats.ship_left)
+        self.ship_left_image = self.font.render(ship_left_str, True, self.text_color, self.ai_setting.bg_color)
+        self.ship_left_rect = self.ship_left_image.get_rect()
+        self.ship_left_rect.left = self.screen_rect.left + 20
+        self.ship_left_rect.top = self.score_rect.top
+
 
 
     def show_score(self):
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
+        self.screen.blit(self.ship_left_image, self.ship_left_rect)
+
 
