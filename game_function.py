@@ -9,6 +9,8 @@ def check_event(ai_setting, screen, ship, bullets, stats, play_button, score):
     #按键监测
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            with open('.high_score','w') as file:
+                file.write(str(stats.high_score))
             sys.exit()
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
