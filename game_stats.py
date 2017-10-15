@@ -9,8 +9,11 @@ class GameStats(object):
 
         #一般情况下最高得分不会被重置，所以放在init中，而不是reset_stats
         #self.high_score = 0
-        with open('.high_score','r') as file:
-            self.high_score = int(file.readline())
+        try:
+            with open('.high_score','r') as file:
+                self.high_score = int(file.readline())
+        except:
+            self.high_score = 0
 
     def reset_stats(self):
         self.ship_left = self.ai_setting.ship_limit
